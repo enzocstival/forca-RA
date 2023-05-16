@@ -1,0 +1,56 @@
+import random
+
+# Lista de palavras 
+palavras = ['python', 'marina', 'aprovado', 'computador', 'algoritmo', 'programador']
+
+def jogar_forca():
+    palavra = random.choice(palavras)  # Escolhe uma palavra aleatória da lista
+    letras_certas = []
+    letras_erradas = []
+    tentativas = 10
+
+    print("Bem-vindo ao jogo da forca!")
+    print("A palavra tem", len(palavra), "letras.")
+    print("_ " * len(palavra))
+#loop while para continuar o jogo até que o jogador vença ou perca...
+    while True:
+        # Solicita ao jogador uma letra
+        letra = input("Digite uma letra: ").lower()
+
+        if letra in letras_certas or letra in letras_erradas:
+            print("Você já tentou essa letra. Tente novamente!")
+            continue
+
+        if letra.isalpha() and len(letra) == 1:
+            if letra in palavra:
+                letras_certas.append(letra)
+            else:
+                letras_erradas.append(letra)
+                tentativas -= 1
+        else:
+            print("Entrada inválida. Digite apenas uma letra.")
+
+        # Imprime as letras corretas e espaços vazios para as não descobertas
+        palavra_descoberta = ""
+        for letra_palavra in palavra:
+            if letra_palavra in letras_certas:
+                palavra_descoberta += letra_palavra + " "
+            else:
+                palavra_descoberta += "_ "
+
+        print(palavra_descoberta)
+        print("Tentativas restantes:", tentativas)
+        print("Letras erradas:", letras_erradas)
+
+        # Verifica se o jogador venceu ou perdeu
+        if tentativas == 0:
+            print("Você perdeu! A palavra era:", palavra)
+            break
+
+        if all(letra in letras_certas for letra in palavra):
+            print("Parabéns! Você venceu!")
+            break
+
+# rodar 
+jogar_forca()
+#notaboa:)
